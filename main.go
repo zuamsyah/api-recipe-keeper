@@ -18,26 +18,18 @@ var (
 	dbh      *gorm.DB
 )
 
-// @title Zahir Courier Service API
+// @title API Recipe Keeper
 // @version 1.0
 
-// @host courier-dev.zahironline.com
-// @schemes https
+// @host localhost
+// @schemes http
 // @BasePath /
 
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
 // @name Authorization
 
-// @description Zahir Courier Service API.
-// @description
-// @description ## Authorization
-// @description
-// @description This service use Zahir ID Oauth 2.0 Authorization, you SHOULD make authenticated requests with a zahir id access token using the `Authorization` request header field with the `Bearer` HTTP authorization scheme
-// @description ```
-// @description Authorization: Bearer {access_token}
-// @description ```
-// @description On this docs, click `Authorize` > fill the Value with `Bearer {access_token}` > click `Authorize`. Once you've done that, when you `Try it out`, the authorization header with your bearer token should be sent to the API.
+// @description API Recipe Keeper.
 // @description
 // @description ## Query params
 // @description

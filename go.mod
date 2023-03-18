@@ -3,7 +3,6 @@ module api-recipe-keeper
 go 1.17
 
 require (
-	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
 	github.com/go-playground/validator/v10 v10.11.2
@@ -15,7 +14,6 @@ require (
 	github.com/leekchan/accounting v1.0.0
 	github.com/leodido/go-urn v1.2.2
 	github.com/swaggo/echo-swagger v1.3.5
-	github.com/swaggo/swag v1.8.10
 	github.com/tealeg/xlsx v1.0.5
 	github.com/tidwall/sjson v1.2.5
 )
@@ -43,6 +41,7 @@ require (
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24 // indirect
 	github.com/swaggo/files v0.0.0-20220728132757-551d4a08d97a // indirect
+	github.com/swaggo/swag v1.8.10 // indirect
 	github.com/tidwall/gjson v1.14.2 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
