@@ -8,7 +8,7 @@ git clone https://github.com/zuams/api-recipe-keeper.git
 ```
 3. Remove unused dependencies
 ```bash
-cd path/to/recipe-keeper && go mod tidy
+cd path/to/api-recipe-keeper && go mod tidy
 ```
 4. Start
 ```bash
