@@ -372,7 +372,6 @@ func setWhere(db *gorm.DB, params map[string][]string, schema map[string]interfa
 					termands = append(termands, "("+strings.Join(termors, " or ")+")")
 				}
 			}
-			fmt.Println(termands)
 			if len(termands) > 0 {
 				if len(binds) > 0 {
 					db = db.Where(strings.Join(termands, " and "), binds)
