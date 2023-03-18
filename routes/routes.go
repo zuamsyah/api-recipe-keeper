@@ -29,7 +29,6 @@ func Routes(db *gorm.DB) *echo.Echo {
 	e.GET("/api/ingridients", controllers.IngridientGetPaginatedApiHandle)
 	e.POST("/api/ingridients", controllers.IngridientCreateApiHandle)
 	e.PUT("/api/ingridients/:id", controllers.IngridientUpdateByIdApiHandle)
-	e.PATCH("/api/ingridients/:id", controllers.IngridientUpdateByIdApiHandle)
 	e.DELETE("/api/ingridients/:id", controllers.IngridientDeleteByIdApiHandle)
 
 	e.GET("/api/food_categories/:id", controllers.FoodCategoryGetByIdApiHandle)

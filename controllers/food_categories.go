@@ -88,22 +88,6 @@ func FoodCategoryUpdateByIdApiHandle(c echo.Context) error {
 	return helpers.Response(c, 200, res)
 }
 
-// @Summary Partial update food category by id
-// @Description Partial update food category by id
-// @Tags Province
-// @Accept json
-// @Produce json
-// @Security ApiKeyAuth
-// @Param body body models.FoodCategory true "body"
-// @Success 200 {object} models.FoodCategory
-// @Failure 400 {object} helpers.HTTPBadRequest
-// @Failure 401 {object} helpers.HTTPUnauthorized
-// @Failure 403 {object} helpers.HTTPForbidden
-// @Router /api/food_categories/{id} [patch]
-// func FoodCategoryPartialUpdateByIdApiHandle(c echo.Context) error {
-// 	return ProvinceUpdateByIdApiHandle(c)
-// }
-
 // @Summary Delete food category by id
 // @Description Delete food category by id
 // @Tags Province
