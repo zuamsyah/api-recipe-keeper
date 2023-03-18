@@ -1,0 +1,1869 @@
+basePath: /
+definitions:
+  helpers.HTTPBadRequest:
+    properties:
+      error:
+        properties:
+          code:
+            example: 400
+            type: integer
+          message:
+            example: Field xxx wajib diisi.
+            type: string
+        type: object
+    type: object
+  helpers.HTTPDeleted:
+    properties:
+      code:
+        example: 200
+        type: integer
+      message:
+        example: Data dengan id = '6e8ef30f-c443-48b7-89e4-964c207245d9' berhasil dihapus.
+        type: string
+    type: object
+  helpers.HTTPForbidden:
+    properties:
+      error:
+        properties:
+          code:
+            example: 403
+            type: integer
+          message:
+            example: Pengguna tidak memiliki cukup izin untuk mengakses sumber daya.
+            type: string
+        type: object
+    type: object
+  helpers.HTTPList:
+    properties:
+      count:
+        example: 1
+        type: integer
+      page_context:
+        properties:
+          page:
+            example: 1
+            type: integer
+          per_page:
+            example: 10
+            type: integer
+          total_pages:
+            example: 1
+            type: integer
+        type: object
+      results:
+        type: object
+    type: object
+  helpers.HTTPNotFound:
+    properties:
+      error:
+        properties:
+          code:
+            example: 404
+            type: integer
+          message:
+            example: Data dengan id = '6e8ef30f-c443-48b7-89e4-964c207245d9' tidak ditemukan.
+            type: string
+        type: object
+    type: object
+  helpers.HTTPUnauthorized:
+    properties:
+      error:
+        properties:
+          code:
+            example: 401
+            type: integer
+          message:
+            example: Token otentikasi tidak valid.
+            type: string
+        type: object
+    type: object
+  models.CallbackGosend:
+    properties:
+      attributes:
+        properties:
+          key1:
+            type: string
+          key2:
+            type: string
+        type: object
+      booking_id:
+        example: "123456"
+        type: string
+      booking_type:
+        example: instant
+        type: string
+      cancellation_reason:
+        type: string
+      cancelled_by:
+        example: driver
+        type: string
+      delivery_eta:
+        example: 1486528708000-1486528709000
+        type: string
+      driver_name:
+        type: string
+      driver_phone:
+        type: string
+      driver_phone2:
+        type: string
+      driver_phone3:
+        type: string
+      driver_photo_url:
+        type: string
+      entity_id:
+        type: string
+      event_date:
+        example: 1486105171000
+        type: integer
+      event_id:
+        example: 72d82762-8bcc-4412-a180-c71ffcef011a
+        type: string
+      live_tracking_url:
+        example: http://gjk.io/abcd
+        type: string
+      partner_id:
+        example: some-partner-id
+        type: string
+      pickup_eta:
+        example: 1486528706000-1486528707000
+        type: string
+      price:
+        type: number
+      receiver_name:
+        type: string
+      status:
+        example: confirmed
+        type: string
+      total_distance_in_kms:
+        type: number
+      type:
+        example: COMPLETED
+        type: string
+    type: object
+  models.City:
+    properties:
+      created_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+      id:
+        example: 115
+        type: integer
+      name:
+        example: Kota Depok
+        type: string
+      province:
+        $ref: '#/definitions/models.ProvinceShort'
+      type:
+        example: Kota
+        type: string
+      updated_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+    required:
+    - name
+    type: object
+  models.CityShort:
+    properties:
+      id:
+        example: 115
+        type: integer
+      name:
+        example: Kota Depok
+        type: string
+    type: object
+  models.Country:
+    properties:
+      calling_codes:
+        example: "62"
+        type: string
+      capital:
+        example: Jakarta
+        type: string
+      code:
+        example: ID
+        type: string
+      created_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+      name:
+        example: Indonesia
+        type: string
+      region:
+        example: Asia
+        type: string
+      subregion:
+        example: South-Eastern Asia
+        type: string
+      time_zones:
+        example: UTC+07:00,UTC+08:00,UTC+09:00
+        type: string
+      updated_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+    type: object
+  models.CountryShort:
+    properties:
+      code:
+        example: ID
+        type: string
+      name:
+        example: Indonesia
+        type: string
+    type: object
+  models.Courier:
+    properties:
+      code:
+        example: jne
+        type: string
+      created_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+      deleted_at:
+        type: string
+      delivery_cost_estimation_key:
+        example: country,city,subdistrict
+        type: string
+      delivery_tracking_type:
+        example: waybill_manifest
+        type: string
+      id:
+        example: 1
+        type: integer
+      image_url:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        example: Jalur Nugraha Ekakurir (JNE)
+        type: string
+      pickup_service:
+        example: uknown
+        type: string
+      provider:
+        example: rajaongkir
+        type: string
+      sort_number:
+        type: integer
+      updated_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+    type: object
+  models.CourierService:
+    properties:
+      code:
+        example: gosend-instant
+        type: string
+      courier:
+        $ref: '#/definitions/models.CourierShort'
+      created_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+      deleted_at:
+        type: string
+      id:
+        example: 1
+        type: integer
+      image_url:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        example: Instant
+        type: string
+      updated_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+    type: object
+  models.CourierShort:
+    properties:
+      code:
+        example: jne
+        type: string
+      delivery_cost_estimation_key:
+        example: country,city,subdistrict
+        type: string
+      delivery_tracking_type:
+        example: waybill_manifest
+        type: string
+      id:
+        example: 1
+        type: integer
+      name:
+        example: Jalur Nugraha Ekakurir (JNE)
+        type: string
+      pickup_service:
+        example: uknown
+        type: string
+      sort_number:
+        example: 3
+        type: integer
+    type: object
+  models.Delivery:
+    properties:
+      callback_url:
+        type: string
+      courier_service_id:
+        type: integer
+      created_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+      description:
+        type: string
+      destination_address:
+        type: string
+      destination_contact_name:
+        type: string
+      destination_contact_phone:
+        type: string
+      destination_lati:
+        type: number
+      destination_longitude:
+        type: number
+      destination_name:
+        type: string
+      destination_note:
+        type: string
+      driver_id:
+        type: string
+      driver_name:
+        type: string
+      driver_phone:
+        type: string
+      driver_photo:
+        type: string
+      driver_vehicle_number:
+        type: string
+      id:
+        example: 222a761e-7dfc-4586-8f39-0d0fb59bb050
+        type: string
+      live_tracking_url:
+        type: string
+      number:
+        type: string
+      origin_address:
+        type: string
+      origin_contact_name:
+        type: string
+      origin_contact_phone:
+        type: string
+      origin_latitude:
+        type: number
+      origin_longitude:
+        type: number
+      origin_name:
+        type: string
+      origin_note:
+        type: string
+      price:
+        type: number
+      received_at:
+        type: string
+      receiver_name:
+        type: string
+      status:
+        type: string
+      time:
+        type: string
+      updated_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+    type: object
+  models.DeliveryCostEstimation:
+    properties:
+      courier:
+        properties:
+          id:
+            example: 2
+            type: integer
+        required:
+        - id
+        type: object
+      destination:
+        properties:
+          coordinate:
+            properties:
+              latitude:
+                example: -6.284508
+                type: number
+              longitude:
+                example: 106.8295789
+                type: number
+            type: object
+          country:
+            properties:
+              id:
+                example: 0
+                type: integer
+            type: object
+          subdistrict:
+            properties:
+              id:
+                example: 2109
+                type: integer
+            type: object
+        type: object
+      diameter:
+        example: 1
+        type: integer
+      height:
+        example: 1
+        type: integer
+      length:
+        example: 1
+        type: integer
+      origin:
+        properties:
+          city:
+            properties:
+              id:
+                example: 153
+                type: integer
+            type: object
+          coordinate:
+            properties:
+              latitude:
+                example: -6.1263348
+                type: number
+              longitude:
+                example: 106.7890888
+                type: number
+            type: object
+          subdistrict:
+            properties:
+              id:
+                example: 2108
+                type: integer
+            type: object
+        type: object
+      weight:
+        example: 1
+        type: integer
+      width:
+        example: 1
+        type: integer
+    type: object
+  models.PostCancelDelivery:
+    properties:
+      reason:
+        type: string
+    type: object
+  models.PostDelivery:
+    properties:
+      callback_url:
+        example: https://go.zahironline.com/api/v2/tokoku/callback/deliveries/ddaffaa0-b2a4-447e-b76e-e17f601794f0
+        type: string
+      courier_service:
+        properties:
+          id:
+            example: 65
+            type: integer
+        type: object
+      description:
+        example: Sepatu, Sendal, Kaos Kaki
+        type: string
+      destination:
+        properties:
+          address:
+            example: Jalan Jatianom, Pasar Minggu, 12540
+            type: string
+          contact_name:
+            example: Pak Nando
+            type: string
+          contact_phone:
+            example: "6281254564161"
+            type: string
+          latitude:
+            example: -6.284508
+            type: number
+          longitude:
+            example: 106.8295789
+            type: number
+          name:
+            example: Toko Jaya Agung
+            type: string
+          note:
+            example: Tolong Hati-Hati
+            type: string
+        required:
+        - address
+        - contact_name
+        - contact_phone
+        - latitude
+        - longitude
+        type: object
+      number:
+        example: "158480409321"
+        type: string
+      origin:
+        properties:
+          address:
+            example: Jalan Pancoran Buntu I, Pancoran, 12780
+            type: string
+          contact_name:
+            example: Pak Andri
+            type: string
+          contact_phone:
+            example: "6285201311802"
+            type: string
+          latitude:
+            example: -6.1263348
+            type: number
+          longitude:
+            example: 106.7890888
+            type: number
+          name:
+            example: The Kingdom Shop
+            type: string
+          note:
+            example: Tunggu di Lobby
+            type: string
+        required:
+        - address
+        - contact_name
+        - contact_phone
+        - latitude
+        - longitude
+        type: object
+    type: object
+  models.Province:
+    properties:
+      country:
+        $ref: '#/definitions/models.CountryShort'
+      created_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+      id:
+        example: 9
+        type: integer
+      name:
+        example: Jawa Barat
+        type: string
+      updated_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+    required:
+    - name
+    type: object
+  models.ProvinceShort:
+    properties:
+      id:
+        example: 9
+        type: integer
+      name:
+        example: Jawa Barat
+        type: string
+    type: object
+  models.SettingShort:
+    properties:
+      db.migration.version:
+        example: "0036"
+        type: string
+      db.seed.version:
+        example: "0011"
+        type: string
+      origin_address.subdistrict.id:
+        example: 222a761e-7dfc-4586-8f39-0d0fb59bb050
+        type: string
+    type: object
+  models.Subdistrict:
+    properties:
+      city:
+        $ref: '#/definitions/models.CityShort'
+      created_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+      id:
+        example: 1587
+        type: integer
+      name:
+        example: Tapos
+        type: string
+      updated_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+    required:
+    - name
+    type: object
+host: localhost:4000
+info:
+  contact: {}
+  description: |-
+    Zahir Courier Service API.
+
+    ## Authorization
+
+    This service use Zahir ID Oauth 2.0 Authorization, you SHOULD make authenticated requests with a zahir id access token using the `Authorization` request header field with the `Bearer` HTTP authorization scheme
+    ```
+    Authorization: Bearer {access_token}
+    ```
+    On this docs, click `Authorize` > fill the Value with `Bearer {access_token}` > click `Authorize`. Once you've done that, when you `Try it out`, the authorization header with your bearer token should be sent to the API.
+
+    ## Query params
+
+    By default, we support a common way for selecting fields, filtering, searching, sorting, and pagination in URL query params on `GET` method:
+
+    ### Field
+
+    Get selected fields in GET result, example:
+    ```
+    GET /api/resources?fields=field_a,field_b,field_c
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT field_a, field_b, field_c FROM resources
+    ```
+
+    ### Filter
+
+    Adds fields request condition (multiple conditions) to the request, example:
+    ```
+    GET /api/resources?field_a=value_a&field_b.$gte=value_b&field_c.$like=value_c&field_d.$ilike=value_d%
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources WHERE (field_a = 'value_a') AND (field_b >= value_b) AND (field_c LIKE '%value_c%') AND (LOWER(field_d) LIKE LOWER('value_d%'))
+    ```
+
+    #### Available filter conditions
+
+    * `$eq`: equal (`=`)
+    * `$ne`: not equal (`!=`)
+    * `$gt`: greater than (`>`)
+    * `$gte`: greater than or equal (`>=`)
+    * `$lt`: lower than (`<`)
+    * `$lte`: lower than or equal (`<=`)
+    * `$like`: contains (`LIKE '%value%'`)
+    * `$ilike`: contains case insensitive (`LOWER(field) LIKE LOWER('%value%')`)
+    * `$nlike`: not contains (`NOT LIKE '%value%'`)
+    * `$nilike`: not contains case insensitive (`LOWER(field) NOT LIKE LOWER('%value%')`)
+    * `$in`: in range, accepts multiple values (`IN ('value_a', 'value_b')`)
+    * `$nin`: not in range, accepts multiple values (`NOT IN ('value_a', 'value_b')`)
+    * `$regexp`: regex (`REGEXP '%value%'`)
+    * `$nregexp`: not regex (`NOT REGEXP '%value%'`)
+
+    ### Or
+
+    Adds `OR` conditions to the request, example:
+    ```
+    GET /api/resources?or=field_a:val_a|field_b.$gte:val_b;field_c.$lte:val_c|field_d.$like:val_d
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources WHERE (field_a=val_a OR field_b <= val_b) AND (field_c <= val_c OR field_d LIKE '%val_d%')
+    ```
+
+    ### Search
+
+    Adds a search conditions to the request, example:
+    ```
+    GET /api/resources?search=field_a,field_b:term_1;field_c,field_d:term_2
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources WHERE (LOWER(field_a) LIKE LOWER('%term_1%') OR LOWER(field_b) LIKE LOWER('%term_1%')) AND (LOWER(field_c) LIKE LOWER('%term_2%') OR LOWER(field_d) LIKE LOWER('%term_2%'))
+    ```
+
+    ### Sort
+
+    Adds sort by field (by multiple fields) and order to query result, example:
+    ```
+    GET /api/resources?sorts=field_a,-field_b,field_c:i,-field_d:i
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources ORDER BY field_a ASC, field_b DESC, LOWER(field_c) ASC, LOWER(field_d) DESC
+    ```
+
+    ### Page
+
+    Specify the page of results to return, example:
+    ```
+    GET /api/resources?page=3&per_page=10
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources LIMIT 10 OFFSET 20
+    ```
+
+    ### Per Page
+
+    Specify the number of records to return in one request, example:
+    ```
+    GET /api/resources?per_page=10
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources LIMIT 10
+    ```
+  title: Zahir Courier Service API
+  version: "1.0"
+paths:
+  /api/callback/gosend/deliveries:
+    post:
+      consumes:
+      - application/json
+      description: Webhooks Call Back API
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.CallbackGosend'
+      produces:
+      - application/json
+      responses:
+        "200": {}
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      summary: Webhooks Call Back API
+      tags:
+      - Webhooks
+  /api/cities:
+    get:
+      consumes:
+      - application/json
+      description: Get city list
+      parameters:
+      - description: Search conditions
+        in: query
+        name: search
+        type: string
+      - description: Sort by fields
+        in: query
+        name: sorts
+        type: string
+      - description: Specify the page of results to return
+        in: query
+        name: page
+        type: integer
+      - description: Specify the number of records to return in one request
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.HTTPList'
+            - properties:
+                results:
+                  items:
+                    $ref: '#/definitions/models.City'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Get city list
+      tags:
+      - City
+    post:
+      consumes:
+      - application/json
+      description: Create new city
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.City'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.City'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Create new city
+      tags:
+      - City
+  /api/cities/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete city by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.City'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helpers.HTTPDeleted'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete city by id
+      tags:
+      - City
+    get:
+      consumes:
+      - application/json
+      description: Get city by id
+      parameters:
+      - description: City ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.City'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.HTTPNotFound'
+      security:
+      - ApiKeyAuth: []
+      summary: Get city by id
+      tags:
+      - City
+    patch:
+      consumes:
+      - application/json
+      description: Partial update city by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.City'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.City'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Partial update city by id
+      tags:
+      - City
+    put:
+      consumes:
+      - application/json
+      description: Update city by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.City'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.City'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Update city by id
+      tags:
+      - City
+  /api/countries:
+    get:
+      consumes:
+      - application/json
+      description: Get country list
+      parameters:
+      - description: Search conditions
+        in: query
+        name: search
+        type: string
+      - description: Sort by fields
+        in: query
+        name: sorts
+        type: string
+      - description: Specify the page of results to return
+        in: query
+        name: page
+        type: integer
+      - description: Specify the number of records to return in one request
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.HTTPList'
+            - properties:
+                results:
+                  items:
+                    $ref: '#/definitions/models.Country'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Get country list
+      tags:
+      - Country
+  /api/countries/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get country by id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Country'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.HTTPNotFound'
+      security:
+      - ApiKeyAuth: []
+      summary: Get country by id
+      tags:
+      - Country
+  /api/courier_services:
+    get:
+      consumes:
+      - application/json
+      description: Get courier service list
+      parameters:
+      - description: Search conditions
+        in: query
+        name: search
+        type: string
+      - description: Sort by fields
+        in: query
+        name: sorts
+        type: string
+      - description: Specify the page of results to return
+        in: query
+        name: page
+        type: integer
+      - description: Specify the number of records to return in one request
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.HTTPList'
+            - properties:
+                results:
+                  items:
+                    $ref: '#/definitions/models.CourierService'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Get courier service list
+      tags:
+      - Courier Service
+  /api/courier_services/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get courier service by id
+      parameters:
+      - description: Courier Service ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CourierService'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.HTTPNotFound'
+      security:
+      - ApiKeyAuth: []
+      summary: Get courier service by id
+      tags:
+      - Courier Service
+  /api/couriers:
+    get:
+      consumes:
+      - application/json
+      description: Get courier list
+      parameters:
+      - description: Search conditions
+        in: query
+        name: search
+        type: string
+      - description: Sort by fields
+        in: query
+        name: sorts
+        type: string
+      - description: Specify the page of results to return
+        in: query
+        name: page
+        type: integer
+      - description: Specify the number of records to return in one request
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.HTTPList'
+            - properties:
+                results:
+                  items:
+                    $ref: '#/definitions/models.Courier'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Get courier list
+      tags:
+      - Courier
+  /api/couriers/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get courier by id
+      parameters:
+      - description: Courier ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Courier'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.HTTPNotFound'
+      security:
+      - ApiKeyAuth: []
+      summary: Get courier by id
+      tags:
+      - Courier
+  /api/deliveries:
+    post:
+      consumes:
+      - application/json
+      description: Request Delivery
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.PostDelivery'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.PostDelivery'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Request Delivery
+      tags:
+      - Delivery
+  /api/deliveries/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Cancel Delivery
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.PostCancelDelivery'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Delivery'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Cancel Delivery
+      tags:
+      - Delivery
+    get:
+      consumes:
+      - application/json
+      description: Get delivery by id
+      parameters:
+      - description: Delivery ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Delivery'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.HTTPNotFound'
+      security:
+      - ApiKeyAuth: []
+      summary: Get delivery by id
+      tags:
+      - Delivery
+  /api/delivery_cost_estimation:
+    post:
+      consumes:
+      - application/json
+      description: Calculate Delivery Cost Estimation
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.DeliveryCostEstimation'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DeliveryCostEstimation'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Calculate Delivery Cost Estimation
+      tags:
+      - Delivery Cost Estimation
+  /api/provinces:
+    get:
+      consumes:
+      - application/json
+      description: Get province list
+      parameters:
+      - description: Search conditions
+        in: query
+        name: search
+        type: string
+      - description: Sort by fields
+        in: query
+        name: sorts
+        type: string
+      - description: Specify the page of results to return
+        in: query
+        name: page
+        type: integer
+      - description: Specify the number of records to return in one request
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.HTTPList'
+            - properties:
+                results:
+                  items:
+                    $ref: '#/definitions/models.Province'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Get province list
+      tags:
+      - Province
+    post:
+      consumes:
+      - application/json
+      description: Create new province
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Province'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Province'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Create new province
+      tags:
+      - Province
+  /api/provinces/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete province by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Province'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helpers.HTTPDeleted'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete province by id
+      tags:
+      - Province
+    get:
+      consumes:
+      - application/json
+      description: Get province by id
+      parameters:
+      - description: Province ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Province'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.HTTPNotFound'
+      security:
+      - ApiKeyAuth: []
+      summary: Get province by id
+      tags:
+      - Province
+    patch:
+      consumes:
+      - application/json
+      description: Partial update province by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Province'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Province'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Partial update province by id
+      tags:
+      - Province
+    put:
+      consumes:
+      - application/json
+      description: Update province by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Province'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Province'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Update province by id
+      tags:
+      - Province
+  /api/setting:
+    get:
+      consumes:
+      - application/json
+      description: Get current setting
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SettingShort'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Get current setting
+      tags:
+      - Setting
+    post:
+      consumes:
+      - application/json
+      description: Update current setting
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.SettingShort'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SettingShort'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Update current setting
+      tags:
+      - Setting
+  /api/subdistricts:
+    get:
+      consumes:
+      - application/json
+      description: Get subdistrict list
+      parameters:
+      - description: Search conditions
+        in: query
+        name: search
+        type: string
+      - description: Sort by fields
+        in: query
+        name: sorts
+        type: string
+      - description: Specify the page of results to return
+        in: query
+        name: page
+        type: integer
+      - description: Specify the number of records to return in one request
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.HTTPList'
+            - properties:
+                results:
+                  items:
+                    $ref: '#/definitions/models.Subdistrict'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Get subdistrict list
+      tags:
+      - Subdistrict
+    post:
+      consumes:
+      - application/json
+      description: Create new subdistrict
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Subdistrict'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Subdistrict'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Create new subdistrict
+      tags:
+      - Subdistrict
+  /api/subdistricts/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete subdistrict by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Subdistrict'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helpers.HTTPDeleted'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete subdistrict by id
+      tags:
+      - Subdistrict
+    get:
+      consumes:
+      - application/json
+      description: Get subdistrict by id
+      parameters:
+      - description: Subdistrict ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Subdistrict'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.HTTPNotFound'
+      security:
+      - ApiKeyAuth: []
+      summary: Get subdistrict by id
+      tags:
+      - Subdistrict
+    patch:
+      consumes:
+      - application/json
+      description: Partial update subdistrict by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Subdistrict'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Subdistrict'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Partial update subdistrict by id
+      tags:
+      - Subdistrict
+    put:
+      consumes:
+      - application/json
+      description: Update subdistrict by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Subdistrict'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Subdistrict'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Update subdistrict by id
+      tags:
+      - Subdistrict
+schemes:
+- http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
