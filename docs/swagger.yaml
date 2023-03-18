@@ -1,0 +1,531 @@
+basePath: /
+definitions:
+  helpers.HTTPBadRequest:
+    properties:
+      error:
+        properties:
+          code:
+            example: 400
+            type: integer
+          message:
+            example: Field xxx wajib diisi.
+            type: string
+        type: object
+    type: object
+  helpers.HTTPDeleted:
+    properties:
+      code:
+        example: 200
+        type: integer
+      message:
+        example: Data dengan id = '6e8ef30f-c443-48b7-89e4-964c207245d9' berhasil
+          dihapus.
+        type: string
+    type: object
+  helpers.HTTPForbidden:
+    properties:
+      error:
+        properties:
+          code:
+            example: 403
+            type: integer
+          message:
+            example: Pengguna tidak memiliki cukup izin untuk mengakses sumber daya.
+            type: string
+        type: object
+    type: object
+  helpers.HTTPList:
+    properties:
+      count:
+        example: 1
+        type: integer
+      page_context:
+        properties:
+          page:
+            example: 1
+            type: integer
+          per_page:
+            example: 10
+            type: integer
+          total_pages:
+            example: 1
+            type: integer
+        type: object
+      results: {}
+    type: object
+  helpers.HTTPNotFound:
+    properties:
+      error:
+        properties:
+          code:
+            example: 404
+            type: integer
+          message:
+            example: Data dengan id = '6e8ef30f-c443-48b7-89e4-964c207245d9' tidak
+              ditemukan.
+            type: string
+        type: object
+    type: object
+  helpers.HTTPUnauthorized:
+    properties:
+      error:
+        properties:
+          code:
+            example: 401
+            type: integer
+          message:
+            example: Token otentikasi tidak valid.
+            type: string
+        type: object
+    type: object
+  models.FoodCategory:
+    properties:
+      created_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+      id:
+        example: 115
+        type: integer
+      name:
+        example: Kota Depok
+        maxLength: 255
+        type: string
+      updated_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+    required:
+    - name
+    type: object
+  models.FoodCategoryShort:
+    properties:
+      id:
+        type: integer
+    type: object
+  models.Ingridient:
+    properties:
+      created_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+      id:
+        example: 115
+        type: integer
+      name:
+        maxLength: 255
+        type: string
+      unit:
+        type: string
+      updated_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+    required:
+    - name
+    type: object
+  models.IngridientShort:
+    properties:
+      id:
+        type: integer
+      quantity:
+        type: string
+    type: object
+  models.Recipe:
+    properties:
+      created_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+      food_category:
+        $ref: '#/definitions/models.FoodCategoryShort'
+      id:
+        example: 1
+        type: integer
+      ingridients:
+        items:
+          $ref: '#/definitions/models.IngridientShort'
+        type: array
+      name:
+        example: Jalur Nugraha Ekakurir (JNE)
+        type: string
+      quantity:
+        type: string
+      updated_at:
+        example: "2020-03-16T13:55:09.598136+07:00"
+        type: string
+    type: object
+  models.SettingShort:
+    properties:
+      db.migration.version:
+        example: "0036"
+        type: string
+      db.seed.version:
+        example: "0011"
+        type: string
+      origin_address.subdistrict.id:
+        example: 222a761e-7dfc-4586-8f39-0d0fb59bb050
+        type: string
+    type: object
+host: localhost
+info:
+  contact: {}
+  description: |-
+    API Recipe Keeper.
+
+    ## Query params
+
+    By default, we support a common way for selecting fields, filtering, searching, sorting, and pagination in URL query params on `GET` method:
+
+    ### Field
+
+    Get selected fields in GET result, example:
+    ```
+    GET /api/resources?fields=field_a,field_b,field_c
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT field_a, field_b, field_c FROM resources
+    ```
+
+    ### Filter
+
+    Adds fields request condition (multiple conditions) to the request, example:
+    ```
+    GET /api/resources?field_a=value_a&field_b.$gte=value_b&field_c.$like=value_c&field_d.$ilike=value_d%
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources WHERE (field_a = 'value_a') AND (field_b >= value_b) AND (field_c LIKE '%value_c%') AND (LOWER(field_d) LIKE LOWER('value_d%'))
+    ```
+
+    #### Available filter conditions
+
+    * `$eq`: equal (`=`)
+    * `$ne`: not equal (`!=`)
+    * `$gt`: greater than (`>`)
+    * `$gte`: greater than or equal (`>=`)
+    * `$lt`: lower than (`<`)
+    * `$lte`: lower than or equal (`<=`)
+    * `$like`: contains (`LIKE '%value%'`)
+    * `$ilike`: contains case insensitive (`LOWER(field) LIKE LOWER('%value%')`)
+    * `$nlike`: not contains (`NOT LIKE '%value%'`)
+    * `$nilike`: not contains case insensitive (`LOWER(field) NOT LIKE LOWER('%value%')`)
+    * `$in`: in range, accepts multiple values (`IN ('value_a', 'value_b')`)
+    * `$nin`: not in range, accepts multiple values (`NOT IN ('value_a', 'value_b')`)
+    * `$regexp`: regex (`REGEXP '%value%'`)
+    * `$nregexp`: not regex (`NOT REGEXP '%value%'`)
+
+    ### Or
+
+    Adds `OR` conditions to the request, example:
+    ```
+    GET /api/resources?or=field_a:val_a|field_b.$gte:val_b;field_c.$lte:val_c|field_d.$like:val_d
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources WHERE (field_a=val_a OR field_b <= val_b) AND (field_c <= val_c OR field_d LIKE '%val_d%')
+    ```
+
+    ### Search
+
+    Adds a search conditions to the request, example:
+    ```
+    GET /api/resources?search=field_a,field_b:term_1;field_c,field_d:term_2
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources WHERE (LOWER(field_a) LIKE LOWER('%term_1%') OR LOWER(field_b) LIKE LOWER('%term_1%')) AND (LOWER(field_c) LIKE LOWER('%term_2%') OR LOWER(field_d) LIKE LOWER('%term_2%'))
+    ```
+
+    ### Sort
+
+    Adds sort by field (by multiple fields) and order to query result, example:
+    ```
+    GET /api/resources?sorts=field_a,-field_b,field_c:i,-field_d:i
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources ORDER BY field_a ASC, field_b DESC, LOWER(field_c) ASC, LOWER(field_d) DESC
+    ```
+
+    ### Page
+
+    Specify the page of results to return, example:
+    ```
+    GET /api/resources?page=3&per_page=10
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources LIMIT 10 OFFSET 20
+    ```
+
+    ### Per Page
+
+    Specify the number of records to return in one request, example:
+    ```
+    GET /api/resources?per_page=10
+    ```
+    equivalent to sql:
+    ```sql
+    SELECT * FROM resources LIMIT 10
+    ```
+  title: API Recipe Keeper
+  version: "1.0"
+paths:
+  /api/food_categories:
+    get:
+      consumes:
+      - application/json
+      description: Get recipe list
+      parameters:
+      - description: Search conditions
+        in: query
+        name: search
+        type: string
+      - description: Sort by fields
+        in: query
+        name: sorts
+        type: string
+      - description: Specify the page of results to return
+        in: query
+        name: page
+        type: integer
+      - description: Specify the number of records to return in one request
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.HTTPList'
+            - properties:
+                results:
+                  items:
+                    $ref: '#/definitions/models.Recipe'
+                  type: array
+              type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Get recipe list
+      tags:
+      - Province
+    post:
+      consumes:
+      - application/json
+      description: Create new recipe
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Recipe'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Recipe'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Create new recipe
+      tags:
+      - Province
+  /api/food_categories/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete recipe by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Recipe'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helpers.HTTPDeleted'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete recipe by id
+      tags:
+      - Province
+    get:
+      consumes:
+      - application/json
+      description: Get recipe by id
+      parameters:
+      - description: Province ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Recipe'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helpers.HTTPNotFound'
+      security:
+      - ApiKeyAuth: []
+      summary: Get recipe by id
+      tags:
+      - Province
+    put:
+      consumes:
+      - application/json
+      description: Update recipe by id
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Recipe'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Recipe'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Update recipe by id
+      tags:
+      - Province
+  /api/setting:
+    get:
+      consumes:
+      - application/json
+      description: Get current setting
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SettingShort'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Get current setting
+      tags:
+      - Setting
+    post:
+      consumes:
+      - application/json
+      description: Update current setting
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.SettingShort'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SettingShort'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helpers.HTTPBadRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/helpers.HTTPUnauthorized'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/helpers.HTTPForbidden'
+      security:
+      - ApiKeyAuth: []
+      summary: Update current setting
+      tags:
+      - Setting
+schemes:
+- http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
