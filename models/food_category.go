@@ -25,6 +25,10 @@ func (o *FoodCategory) Schema() map[string]interface{} {
 	}
 }
 
+type FoodCategoryShort struct {
+	ID int `json:"id"`
+}
+
 func (o *FoodCategory) GetById(ctx helpers.Context, id string, params map[string][]string) map[string]interface{} {
 	return helpers.GetById(ctx, "food_categories", "id", id, params, o.Schema(), map[string]interface{}{})
 }

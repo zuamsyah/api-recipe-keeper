@@ -14,6 +14,11 @@ type Ingridient struct {
 	UpdatedAt time.Time `json:"updated_at,omitempty" example:"2020-03-16T13:55:09.598136+07:00"`
 }
 
+type IngridientShort struct {
+	ID       int    `json:"id"`
+	Quantity string `json:"quantity"`
+}
+
 func (o *Ingridient) Schema() map[string]interface{} {
 	return map[string]interface{}{
 		"table": map[string]string{"name": "ingridients", "as": "i"},

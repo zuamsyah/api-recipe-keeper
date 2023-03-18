@@ -38,5 +38,11 @@ func Routes(db *gorm.DB) *echo.Echo {
 	e.PUT("/api/food_categories/:id", controllers.FoodCategoryUpdateByIdApiHandle)
 	e.DELETE("/api/food_categories/:id", controllers.FoodCategoryDeleteByIdApiHandle)
 
+	e.GET("/api/recipes/:id", controllers.RecipeGetByIdApiHandle)
+	e.GET("/api/recipes", controllers.RecipeGetPaginatedApiHandle)
+	e.POST("/api/recipes", controllers.RecipeCreateApiHandle)
+	e.PUT("/api/recipes/:id", controllers.RecipeUpdateByIdApiHandle)
+	e.DELETE("/api/recipes/:id", controllers.RecipeDeleteByIdApiHandle)
+
 	return e
 }
